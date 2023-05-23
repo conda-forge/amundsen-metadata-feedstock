@@ -1,5 +1,5 @@
 {% set name = "amundsen-metadata" %}
-{% set version = "3.11.0" %}
+{% set version = "3.12.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/amundsen-metadata-{{ version }}.tar.gz
-  sha256: 8d69604fc732b1bba0930df786717ae07cb69c90b29a3bda6299cbe466510f15
+  sha256: fa74f6431fdfb1ed73e20a6c25de13736c5e29af06bd283351287c3c7d4e60dd
 
 build:
   noarch: python
@@ -61,4 +61,4 @@ about:
 extra:
   recipe-maintainers:
     - rxm7706
- 
+
