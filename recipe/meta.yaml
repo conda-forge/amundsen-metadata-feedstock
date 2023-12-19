@@ -1,5 +1,5 @@
 {% set name = "amundsen-metadata" %}
-{% set version = "3.12.1" %}
+{% set version = "3.12.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/amundsen-metadata-{{ version }}.tar.gz
-  sha256: fa74f6431fdfb1ed73e20a6c25de13736c5e29af06bd283351287c3c7d4e60dd
+  sha256: 88a7e42fded2681f954ed90306865b8e2b09872ff84e7156380dc9d1200edf49
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
@@ -43,7 +43,7 @@ requirements:
     - statsd >=3.2.1
     - typing >=3.6.4
     - werkzeug ==2.0.3
-    - wheel ==0.36.2
+    - wheel >=0.36.2
 
 test:
   imports:
