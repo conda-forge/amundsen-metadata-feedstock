@@ -6,20 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/amundsen-metadata-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/amundsen-metadata-{{ version }}.tar.gz
   sha256: 6472903a6e994d685703733d89c5056d7c76e001731f317a9446e79291d58c8d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - neo4j-python-driver >=4.4.5
     - apache-atlas >=0.0.11
     - beaker >=1.10.0
@@ -50,6 +51,7 @@ test:
     - metadata_service
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://www.github.com/amundsen-io/amundsen/tree/main/metadata
