@@ -1,26 +1,29 @@
-{% set name = "amundsen-metadata" %}
-{% set version = "3.13.0" %}
+schema_version: 1
+
+context:
+  name: amundsen-metadata
+  version: 3.13.0
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/amundsen-metadata-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/amundsen-metadata-${{ version }}.tar.gz
   sha256: 6472903a6e994d685703733d89c5056d7c76e001731f317a9446e79291d58c8d
 
 build:
+  number: 2
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python ${{ python_min }}.*
     - pip
     - setuptools
   run:
-    - python >={{ python_min }}
+    - python >=${{ python_min }}
     - neo4j-python-driver >=4.4.5
     - apache-atlas >=0.0.11
     - beaker >=1.10.0
@@ -46,19 +49,17 @@ requirements:
     - werkzeug >=2.0.3
     - wheel >=0.36.2
 
-test:
-  imports:
-    - metadata_service
-  requires:
-    - pip
-    - python {{ python_min }}
-
+tests:
+  - python:
+      imports:
+        - metadata_service
+      python_version: ${{ python_min }}.*
 about:
-  home: https://www.github.com/amundsen-io/amundsen/tree/main/metadata
   summary: Metadata service for Amundsen
   license: Apache-2.0
   license_file:
     - LICENSE
+  homepage: https://www.github.com/amundsen-io/amundsen/tree/main/metadata
 
 extra:
   recipe-maintainers:
